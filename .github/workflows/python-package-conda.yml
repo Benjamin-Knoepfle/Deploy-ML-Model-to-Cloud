@@ -29,6 +29,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        conda config --add channels conda-forge
         conda env update --file ./starter/requirements.txt --name base
         export PATH="~/miniconda/bin:$PATH"
         conda activate base
