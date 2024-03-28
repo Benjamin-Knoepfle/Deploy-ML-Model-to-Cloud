@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1, '../starter/ml')
+sys.path.insert(1, 'starter/starter/ml/model.py')
 from model import train_model, write_model
 
 def test_model_creation():
