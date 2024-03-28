@@ -61,13 +61,16 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    prediction = model.predict(X)
+    return prediction
+
 
 def write_model(model, dest_pth):
-    with open(os.path.join(dest_pth,'model.pkl'), 'wb') as fp:
+    with open(os.path.join(dest_pth, 'model.pkl'), 'wb') as fp:
         pickle.dump(model, fp)
-        
+
+
 def read_model(src_pth):
-    with open(os.path.join(src_pth,'model.pkl'), 'rb') as fp:
+    with open(os.path.join(src_pth, 'model.pkl'), 'rb') as fp:
         model = pickle.load(fp)
     return model

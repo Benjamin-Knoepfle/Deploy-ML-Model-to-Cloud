@@ -1,19 +1,19 @@
 # Script to train machine learning model.
 
-from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-import pandas as pd
-
 # Add the necessary imports for the starter code.
 import sys
 sys.path.insert(1, './ml')
-from data import process_data, write_preprocessors
-from model import train_model, write_model
-# Add code to load in the data.
-data = pd.read_csv('../data/census_clean.csv')
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import model
+import data
 
-# Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data, test_size=0.20)
+# Add code to load in the data.
+data_ = pd.read_csv('../data/census_clean.csv')
+
+# Optional enhancement, use K-fold cross validation instead of a
+# train-test split.
+train, test = train_test_split(data_, test_size=0.20)
 
 cat_features = [
     "workclass",
@@ -25,19 +25,27 @@ cat_features = [
     "sex",
     "native-country",
 ]
-X_train, y_train, encoder, lb = process_data(
+X_train, y_train, encoder, lb = data.process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
 
-write_preprocessors(encoder, lb, '../model')
+data.write_preprocessors(encoder, lb, '../model')
 
 # Proces the test data with the process_data function.
-X_test, y_test, encoder, lb = process_data(
-    train, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb
+X_test, y_test, encoder, lb =data.process_data(
+    test,
+    categorical_features=cat_features,
+    label="salary",
+    training=False,
+    encoder=encoder, lb=lb
 )
 # Train and save a model.
-clf = train_model(X_train, y_train)
+clf = model.train_model(X_train, y_train)
+model.write_model(clf, '../model')
 
-write_model(clf, '../model')
-
-
+# Test the model performance
+predictions = model.inference(clf, X_test)
+precision, recall, fbeta = model.compute_model_metrics(y_test, predictions)
+print(f"Model score on test data: Precision = {precision}")
+print(f"Model score on test data: Recall = {recall}")
+print(f"Model score on test data: fbeta = {fbeta}")

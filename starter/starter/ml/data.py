@@ -5,8 +5,12 @@ from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
 
 def process_data(
-    X, categorical_features=[], label=None, training=True, encoder=None, lb=None
-):
+        X,
+        categorical_features=[],
+        label=None,
+        training=True,
+        encoder=None,
+        lb=None):
     """ Process the data used in the machine learning pipeline.
 
     Processes the data using one hot encoding for the categorical features and a
@@ -71,6 +75,7 @@ def process_data(
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
 
+
 def write_preprocessors(encoder, lb, dest_pth):
     preprocessors = {
         'encoder': encoder,
@@ -78,7 +83,8 @@ def write_preprocessors(encoder, lb, dest_pth):
     }
     with open(os.path.join(dest_pth, 'preprocessors.pkl'), 'wb') as fp:
         pickle.dump(preprocessors, fp)
-        
+
+
 def read_preprocessors(src_pth):
     with open(os.path.join(src_pth, 'preprocessors.pkl'), 'rb') as fp:
         preprocessors = pickle.load(fp)
