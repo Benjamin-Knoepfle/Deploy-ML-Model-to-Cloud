@@ -30,6 +30,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda install --file ./starter/requirements.txt -c conda-forge
+        export PATH="~/miniconda/bin:$PATH"
         conda activate base
 
     - name: Lint with flake8
