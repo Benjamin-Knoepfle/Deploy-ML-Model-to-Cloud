@@ -1,8 +1,9 @@
-name: Python Package using Conda
+name: Python CI
 
-on: push
-  branch:
-  - master
+on: 
+  push:
+    branches:
+      - master
 
 jobs:
   build-linux:
