@@ -1,3 +1,5 @@
+import os
+import pickle
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
@@ -68,3 +70,16 @@ def process_data(
 
     X = np.concatenate([X_continuous, X_categorical], axis=1)
     return X, y, encoder, lb
+
+def write_preprocessors(encoder, lb, dest_pth):
+    preprocessors = {
+        'encoder': encoder,
+        'lb': lb
+    }
+    with open(os.path.join(dest_pth, 'preprocessors.pkl'), 'wb') as fp:
+        pickle.dump(preprocessors, fp)
+        
+def read_preprocessors(src_pth):
+    with open(os.path.join(src_pth, 'preprocessors.pkl'), 'rb') as fp:
+        preprocessors = pickle.load(fp)
+    return preprocessors['encoder'], preprocessors['lb']
