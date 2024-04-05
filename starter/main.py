@@ -7,6 +7,22 @@ class ItemPayload(BaseModel):
     item_id: Optional[int]
     item_name: str
     quantity: int
+    
+class PredictionPayload(BaseModel):
+    age: int
+    workclass: str
+    fnlgt: int
+    education: str
+    education-num: int
+    marital-status: str
+    occupation: str
+    relationship: str
+    race: str
+    sex: str
+    capital-gain: int
+    capital-loss: int 
+    hours-per-week: int
+    native-country: str
 
 app = FastAPI()
 grocery_list: Dict[int, ItemPayload] = {}
