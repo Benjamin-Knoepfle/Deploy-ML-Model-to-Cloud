@@ -27,6 +27,8 @@ class PredictionPayload(BaseModel):
     native_country: str = Field(default="United-States", alias="native-country")
 
 app = FastAPI()
+encoder,lb = data.read_preprocessors("starter/model") # type: ignore
+clf = model.read_model("starter/model") # type: ignore
 
 
 @app.get("/")
@@ -47,8 +49,6 @@ def make_prediction(features: PredictionPayload) -> Dict[str, str]:
         "sex",
         "native-country",
     ]
-    encoder,lb = data.read_preprocessors("starter/model") # type: ignore
-    clf = model.read_model("starter/model") # type: ignore
     df = pd.DataFrame([features.dict(by_alias=True)])
     processed_features = data.process_data(
         df,
