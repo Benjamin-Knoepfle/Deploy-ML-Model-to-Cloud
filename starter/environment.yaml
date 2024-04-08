@@ -7,4 +7,4 @@ dependencies:
   - python==3.8
   - pip
   - pip:
-    - -r file:starter/requirements.txt
+    - -r file:starter//requirements.txt
