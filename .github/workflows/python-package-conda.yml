@@ -25,7 +25,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        while read requirement; do conda install --yes $requirement || pip install $requirement; done < ./starter/requirements.txt
+        conda env create -f environment.yaml
 
     - name: Lint with flake8
       run: |
