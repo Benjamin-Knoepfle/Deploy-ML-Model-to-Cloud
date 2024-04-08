@@ -5,6 +5,12 @@ channels:
   - conda-forge
 dependencies:
   - python==3.8
-  - pip
-  - pip:
-    - -r file:starter//requirements.txt
+  - numpy
+  - pandas
+  - scikit-learn
+  - pytest
+  - flake8
+  - requests
+  - fastapi==0.63.0
+  - uvicorn
+  - gunicorn
