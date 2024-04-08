@@ -26,6 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda env create -f starter/environment.yaml
+        conda activate deploy_ml
 
     - name: Lint with flake8
       run: |

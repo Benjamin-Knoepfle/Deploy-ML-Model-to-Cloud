@@ -8,11 +8,10 @@ dependencies:
   - numpy
   - pandas
   - scikit-learn
+  - flake8
   - pytest
   - requests
   - fastapi==0.63.0
   - uvicorn
   - gunicorn
-  - pip
-  - pip:
-    - flake8
+    
