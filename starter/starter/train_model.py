@@ -9,13 +9,6 @@ from sklearn.model_selection import train_test_split
 import model
 import data
 
-# Add code to load in the data.
-data_ = pd.read_csv('../data/census_clean.csv')
-
-# Optional enhancement, use K-fold cross validation instead of a
-# train-test split.
-train, test = train_test_split(data_, test_size=0.20)
-
 cat_features = [
     "workclass",
     "education",
@@ -26,6 +19,19 @@ cat_features = [
     "sex",
     "native-country",
 ]
+
+data_ = pd.read_csv('../data/census.csv')
+data_.columns = data_.columns.str.strip()
+data_[cat_features] = data_[cat_features].apply(lambda x: x.str.strip())
+data_.to_csv('../data/census_clean.csv', index=False)
+
+# Add code to load in the data.
+data_ = pd.read_csv('../data/census_clean.csv')
+
+# Optional enhancement, use K-fold cross validation instead of a
+# train-test split.
+train, test = train_test_split(data_, test_size=0.20)
+
 X_train, y_train, encoder, lb = data.process_data(
     train, categorical_features=cat_features, label="salary", training=True
 )
@@ -46,11 +52,11 @@ model.write_model(clf, '../model')
 
 # Test the model performance
 predictions = model.inference(clf, X_test)
-precision, recall, fbeta = model.compute_model_metrics(y_test, predictions)
+precision, recall, fbeta = model.compute_model_metrics(y_test, predictions) # type: ignore
 print(f"Model score on test data: Precision = {precision}")
 print(f"Model score on test data: Recall = {recall}")
 print(f"Model score on test data: fbeta = {fbeta}")
-performances_on_slices = model.performance_on_dataslices(test, y_test, predictions)
+performances_on_slices = model.performance_on_dataslices(test, y_test, predictions) # type: ignore
 
 with open('slice_output.txt', 'w') as fp:
     json.dump(performances_on_slices, fp)
