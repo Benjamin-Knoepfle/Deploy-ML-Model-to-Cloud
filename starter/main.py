@@ -58,7 +58,7 @@ def root() -> Dict[str, str]:
     return {"message": "Hello World"}
 
 # Route to invoke a prediction
-@app.post("/predict/{age}/{workclass}/{fnlgt}/{education}/{education_num}/{marital_status}/{occupation}/{relationship}/{race}/{sex}/{capital_gain}/{capital_loss}/{hours_per_week}/{native_country}")
+@app.post("/predict/")
 def make_prediction(features: PredictionPayload) -> Dict[str, str]:
     # validate data
     if features.age < 0 or features.age > 100:
