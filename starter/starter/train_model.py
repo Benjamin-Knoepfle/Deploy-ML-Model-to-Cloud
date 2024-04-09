@@ -3,6 +3,7 @@
 # Add the necessary imports for the starter code.
 import sys
 sys.path.insert(1, './ml')
+import json
 import pandas as pd
 from sklearn.model_selection import train_test_split
 import model
@@ -49,3 +50,7 @@ precision, recall, fbeta = model.compute_model_metrics(y_test, predictions)
 print(f"Model score on test data: Precision = {precision}")
 print(f"Model score on test data: Recall = {recall}")
 print(f"Model score on test data: fbeta = {fbeta}")
+performances_on_slices = model.performance_on_dataslices(test, y_test, predictions)
+
+with open('slice_output.txt', 'w') as fp:
+    json.dump(performances_on_slices, fp)
