@@ -18,20 +18,20 @@ def test_get_on_root() -> None:
 
 def test_post_prediction_leq_50K():
     features = {
-        "age": 36,
+        "age": 18,
         "workclass": "Self-emp-not-inc",
         "fnlgt": 83311,
-        "education": "Bachelors",
-        "eductaion-num": 13,
+        "education": "9th",
+        "eductaion-num": 5,
         "marital-status": "Married-civ-spouse",
         "occupation": "Handlers-cleaners",
         "relationship": "Not-in-family",
-        "race": "White",
-        "sex": "Male",
+        "race": "Black",
+        "sex": "Female",
         "capital-gain": 0,
         "capital-loss": 0,
-        "hours-per-week": 40,
-        "native-country": "United-States"
+        "hours-per-week": 16,
+        "native-country": "Jamaica"
     }
     r = client.post("/predict/", data=json.dumps(features))
     assert r.status_code == 200
