@@ -1,13 +1,12 @@
 # Put the code for your API here.
-import model
-import data
 from fastapi import FastAPI, HTTPException
 from typing import Dict
 from pydantic import BaseModel, Field
 import pandas as pd
-
 import sys
 sys.path.insert(1, './starter/starter/ml')
+import model # noqa
+import data # noqa
 
 
 # TODO: Add classes to incorporate categorical fields
