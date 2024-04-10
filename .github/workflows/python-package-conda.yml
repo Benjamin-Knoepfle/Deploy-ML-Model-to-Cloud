@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  continuous-integration:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,8 +36,8 @@ jobs:
       run: |
         pytest -vv
         
-  merge-branch:
-    needs: build
+  continuous-deployment:
+    needs: continuous-integration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
