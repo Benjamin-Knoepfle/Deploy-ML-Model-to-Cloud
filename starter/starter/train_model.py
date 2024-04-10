@@ -1,13 +1,13 @@
 # Script to train machine learning model.
 
 # Add the necessary imports for the starter code.
-import data
-import model
 from sklearn.model_selection import train_test_split
 import pandas as pd
 import json
 import sys
 sys.path.insert(1, './ml')
+import data  # noqa
+import model # noqa
 
 cat_features = [
     "workclass",
