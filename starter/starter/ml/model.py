@@ -16,6 +16,8 @@ cat_features = [
 ]
 
 # Optional: implement hyperparameter tuning.
+
+
 def train_model(X_train, y_train):
     """
     Trains a machine learning model and returns it.
@@ -38,7 +40,8 @@ def train_model(X_train, y_train):
 
 def compute_model_metrics(y, preds):
     """
-    Validates the trained machine learning model using precision, recall, and F1.
+    Validates the trained machine learning model
+    using precision, recall, and F1.
 
     Inputs
     ------
@@ -58,23 +61,25 @@ def compute_model_metrics(y, preds):
     return precision, recall, fbeta
 
 
-def performance_on_dataslices(data, y , preds):
+def performance_on_dataslices(data, y, preds):
     performances = {}
     for feature in cat_features:
-        performances[feature] = performance_on_dataslice(data, y, preds, feature)
+        performances[feature] = performance_on_dataslice(
+            data, y, preds, feature)
     return performances
-    
+
 
 def performance_on_dataslice(data, y, preds, feature):
     values = np.unique(data[feature])
     performances = {}
-    
+
     data_ = data.copy()
     data_['target'] = y
     data_['predictions'] = preds
     for val in values:
-        slice = data_[data[feature]==val]
-        precision, recall, fbeta = compute_model_metrics(slice['target'], slice['predictions'])
+        slice = data_[data[feature] == val]
+        precision, recall, fbeta = compute_model_metrics(
+            slice['target'], slice['predictions'])
         performances[val] = {
             'precision': precision,
             'recall': recall,

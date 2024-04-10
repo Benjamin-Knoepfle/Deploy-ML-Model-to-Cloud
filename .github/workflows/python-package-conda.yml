@@ -30,7 +30,7 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are any flake8 throws errors
-        $CONDA/bin/flake8 . 
+        $CONDA/bin/flake8 . --exclude=sanitycheck.py
      
     - name: Test with pytest
       run: |

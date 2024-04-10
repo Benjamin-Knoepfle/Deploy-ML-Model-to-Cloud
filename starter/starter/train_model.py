@@ -1,13 +1,13 @@
 # Script to train machine learning model.
 
 # Add the necessary imports for the starter code.
+import data
+import model
+from sklearn.model_selection import train_test_split
+import pandas as pd
+import json
 import sys
 sys.path.insert(1, './ml')
-import json
-import pandas as pd
-from sklearn.model_selection import train_test_split
-import model
-import data
 
 cat_features = [
     "workclass",
@@ -39,7 +39,7 @@ X_train, y_train, encoder, lb = data.process_data(
 data.write_preprocessors(encoder, lb, '../model')
 
 # Proces the test data with the process_data function.
-X_test, y_test, encoder, lb =data.process_data(
+X_test, y_test, encoder, lb = data.process_data(
     test,
     categorical_features=cat_features,
     label="salary",
@@ -52,11 +52,13 @@ model.write_model(clf, '../model')
 
 # Test the model performance
 predictions = model.inference(clf, X_test)
-precision, recall, fbeta = model.compute_model_metrics(y_test, predictions) # type: ignore
+precision, recall, fbeta = model.compute_model_metrics(
+    y_test, predictions)  # type: ignore
 print(f"Model score on test data: Precision = {precision}")
 print(f"Model score on test data: Recall = {recall}")
 print(f"Model score on test data: fbeta = {fbeta}")
-performances_on_slices = model.performance_on_dataslices(test, y_test, predictions) # type: ignore
+performances_on_slices = model.performance_on_dataslices(
+    test, y_test, predictions)  # type: ignore
 
 with open('slice_output.txt', 'w') as fp:
     json.dump(performances_on_slices, fp)
