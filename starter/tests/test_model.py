@@ -1,9 +1,10 @@
 import pandas as pd
-import data
-from model import train_model, read_model
 from sklearn.tree import DecisionTreeClassifier
 import sys
 sys.path.insert(1, 'starter/starter/ml')
+import data # noqa
+from model import train_model, read_model # noqa
+
 
 cat_features = [
     "workclass",

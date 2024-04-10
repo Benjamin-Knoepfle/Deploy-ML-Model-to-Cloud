@@ -1,10 +1,11 @@
-from main import app
+import sys
 from requests import Response
 from fastapi.testclient import TestClient
 import json
-import sys
 sys.path.insert(1, 'starter')
 sys.path.insert(1, 'starter/starter/ml')
+from main import app # noqa
+
 
 client = TestClient(app)
 
