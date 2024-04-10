@@ -49,3 +49,10 @@ jobs:
           target_branch: production
           message: Merge master into production
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Render.com
+      # Only run this step via deploywebhook, see https://docs.render.com/deploy-hooks
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
